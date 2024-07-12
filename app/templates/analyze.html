@@ -1,16 +1,24 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block content %}
 <div class="max-w-2xl mx-auto">
   <h1 class="text-3xl font-bold mb-4">Sentiment Analysis</h1>
   <form method="POST" action="" class="mb-8">
     {{ form.hidden_tag() }}
     <div class="mb-4">
       {{ form.text.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-      {{ form.text(class="shadow appearance-none border rounded w-full py-2 px-3
-      text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
-      rows="4") }}
+      {{ form.text(
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+        focus:outline-none
+        focus:shadow-outline", rows="4"
+        )
+      }}
     </div>
-    {{ form.submit(class="bg-blue-500 hover:bg-blue-700 text-white font-bold
-    py-2 px-4 rounded focus:outline-none focus:shadow-outline") }}
+    {{ form.submit(
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+      focus:outline-none
+      focus:shadow-outline"
+      )
+    }}
   </form>
 
   {% if sentiment %}
@@ -29,12 +37,15 @@
       <strong>Compound:</strong> {{ "%.2f"|format(sentiment['compound']) }}
     </p>
 
-    {% set sentiment_class = "text-yellow-600" %} {% set sentiment_text =
-    "Neutral" %} {% if sentiment['compound'] >= 0.05 %} {% set sentiment_class =
-    "text-green-600" %} {% set sentiment_text = "Positive" %} {% elif
-    sentiment['compound'] <= -0.05 %} {% set sentiment_class = "text-red-600" %}
-    {% set sentiment_text = "Negative" %} {% endif %}
-
+    {% set sentiment_class = "text-yellow-600" %}
+    {% set sentiment_text = "Neutral" %}
+    {% if sentiment['compound'] >= 0.05 %}
+      {% set sentiment_class = "text-green-600" %}
+      {% set sentiment_text = "Positive" %}
+    {% elif sentiment['compound'] <= -0.05 %}
+      {% set sentiment_class = "text-red-600" %}
+      {% set sentiment_text = "Negative" %}
+    {% endif %}
     <p class="text-lg font-bold {{ sentiment_class }}">
       Overall Sentiment: {{ sentiment_text }}
     </p>
