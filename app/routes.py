@@ -9,8 +9,8 @@ from app.models import User
 
 nltk.download("vader_lexicon")
 
-main = Blueprint("main", __name__)
-auth = Blueprint("auth", __name__)
+main = Blueprint("main", __name__, static_folder="static")
+auth = Blueprint("auth", __name__, static_folder="static")
 
 
 @main.route("/")
@@ -43,7 +43,7 @@ def login():
             return redirect(url_for("auth.login"))
         login_user(user)
         return redirect(url_for("main.index"))
-    return render_template("login.html", title="Sign In", form=form)
+    return render_template("login.html", title="Login", form=form)
 
 
 @auth.route("/logout")
