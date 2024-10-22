@@ -14,11 +14,17 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
 
+    # モデルのインポートを追加
+    from app.models import User
+
+    # アプリケーションコンテキスト内でデータベースを初期化
+    with app.app_context():
+        db.create_all()
+
     from app.routes import main, auth
     app.register_blueprint(main)
     app.register_blueprint(auth)
 
-    # エラーハンドラーの登録
     @app.errorhandler(404)
     def not_found_error(error):
         return render_template('404.html'), 404

@@ -187,5 +187,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
 # My gitignore
-qa_contexts.db
+app.db
